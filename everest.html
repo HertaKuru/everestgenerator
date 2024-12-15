@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Account Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Roblox Account Generator</h1>
+    <button onclick="generateAccount()">Generate Account</button>
+    <div class="output" id="output"></div>
+
+    <script>
+        function generateAccount() {
+            const output = document.getElementById('output');
+
+            // Generate random birthday
+            const year = Math.floor(Math.random() * (2020 - 1980 + 1)) + 1980;
+            const month = Math.floor(Math.random() * 12) + 1;
+            const day = Math.floor(Math.random() * 28) + 1;
+            const birthday = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+            // Generate random username following Roblox rules
+            const usernameLength = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+            const usernameChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
+            let username = '';
+            for (let i = 0; i < usernameLength; i++) {
+                username += usernameChars.charAt(Math.floor(Math.random() * usernameChars.length));
+            }
+
+            // Ensure username doesn't start or end with an underscore
+            if (username.startsWith('_') || username.endsWith('_')) {
+                username = username.replace(/^_+|_+$/g, 'Alt');
+            }
+
+            // Generate a 24-character long password
+            const passwordChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
+            let password = '';
+            for (let i = 0; i < 24; i++) {
+                password += passwordChars.charAt(Math.floor(Math.random() * passwordChars.length));
+            }
+
+            // Display the results
+            output.innerHTML = `
+                <p><strong>Birthday:</strong> ${birthday}</p>
+                <p><strong>Username:</strong> ${username}</p>
+                <p><strong>Password:</strong> ${password}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
